@@ -31,7 +31,7 @@ async function tail() {
   new Tail(process.env.TALKOPS_STDERR).on('line', (data) => {
     pub(
       JSON.stringify({
-        createdAt: new Date().getTime(),
+        createdAt: process.hrtime.bigint(),
         data,
         type: 'stderr',
       }),
@@ -40,7 +40,7 @@ async function tail() {
   new Tail(process.env.TALKOPS_STDOUT).on('line', (data) => {
     pub(
       JSON.stringify({
-        createdAt: new Date().getTime(),
+        createdAt: process.hrtime.bigint(),
         data,
         type: 'stdout',
       }),
