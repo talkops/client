@@ -20,7 +20,7 @@ async function sub(socket) {
       }),
   })
   es.addEventListener('message', (message) => {
-    socket.write(message.data)
+    socket.write(`${message.data}\n`)
   })
   es.onerror = () => {
     es.close()
