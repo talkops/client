@@ -3,6 +3,7 @@
 import { createServer } from 'net'
 import { EventSource } from 'eventsource'
 import { Tail } from 'tail'
+import { unlink } from 'fs/promises'
 
 const config = JSON.parse(Buffer.from(process.env.TALKOPS_TOKEN, 'base64').toString())
 const esUrl = `${config.url}?topic=${encodeURIComponent(config.subscriber.topic)}`
@@ -74,6 +75,9 @@ async function heartbeat() {
 }
 
 async function main() {
+  try {
+    await unlink(process.env.TALKOPS_SOCKET)
+  } catch (err) {}
   createServer()
     .listen(process.env.TALKOPS_SOCKET)
     .on('connection', (socket) => {
