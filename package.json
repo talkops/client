@@ -1,0 +1,14 @@
+{
+  "name": "talkops-client",
+  "description": "TalkOps Client",
+  "version": "0.1.0",
+  "author": "PicoUX",
+  "license": "MIT",
+  "bin": {
+    "talkops": "./index.mjs"
+  },
+  "dependencies": {
+    "eventsource": "^4.0.0",
+    "tail": "^2.2.6"
+  }
+}
