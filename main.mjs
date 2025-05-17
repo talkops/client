@@ -31,8 +31,8 @@ async function tail() {
   new Tail(process.env.TALKOPS_STDERR).on('line', (data) => {
     pub(
       JSON.stringify({
+        createdAt: new Date().getTime(),
         data,
-        time: new Date().getTime(),
         type: 'stderr',
       }),
     )
@@ -40,8 +40,8 @@ async function tail() {
   new Tail(process.env.TALKOPS_STDOUT).on('line', (data) => {
     pub(
       JSON.stringify({
+        createdAt: new Date().getTime(),
         data,
-        time: new Date().getTime(),
         type: 'stdout',
       }),
     )
