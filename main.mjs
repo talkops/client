@@ -28,23 +28,29 @@ async function sub(socket) {
 }
 
 async function tail() {
+  let stderrId = 1
   new Tail(process.env.TALKOPS_STDERR).on('line', (data) => {
     pub(
       JSON.stringify({
-        createdAt: process.hrtime.bigint(),
+        createdAt: Date.now(),
         data,
+        id: stderrId,
         type: 'stderr',
       }),
     )
+    stderrId++
   })
+  let stdoutId = 1
   new Tail(process.env.TALKOPS_STDOUT).on('line', (data) => {
     pub(
       JSON.stringify({
-        createdAt: process.hrtime.bigint(),
+        createdAt: Date.now(),
         data,
+        id: stdoutId,
         type: 'stdout',
       }),
     )
+    stdoutId++
   })
 }
 
