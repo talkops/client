@@ -1,7 +1,7 @@
 {
   "name": "talkops-client",
   "description": "TalkOps Client",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "PicoUX",
   "license": "MIT",
   "bin": {
