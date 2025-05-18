@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { createInterface } from 'readline'
 import { createServer } from 'net'
 import { EventSource } from 'eventsource'
 import { Tail } from 'tail'
@@ -81,9 +82,7 @@ async function main() {
   createServer()
     .listen(process.env.TALKOPS_SOCKET)
     .on('connection', (socket) => {
-      socket.on('data', (data) => {
-        pub(data.toString())
-      })
+      createInterface({ input: socket }).on('line', (line) => pub(line))
       sub(socket)
     })
   heartbeat()
